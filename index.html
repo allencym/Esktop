@@ -1,0 +1,159 @@
+
+### 3. File: `index.html`
+
+This is the big one — A + B + C combined. Save the WHOLE block below as `index.html`.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esktop — Your Desktop, Everywhere | Free Web Desktop + Safe App Store</title>
+<meta name="description" content="Esktop is a free web desktop + safe desktop app store. No install to start. No cracks. Works on Windows, Mac, Chromebook and phone.">
+<style>
+*{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+body{margin:0;color:#0f172a;background:#fff;line-height:1.5}
+a{color:#2563eb;text-decoration:none}
+.container{max-width:1120px;margin:0 auto;padding:0 20px}
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid #e2e8f0}
+.nav-inner{max-width:1120px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-weight:900;font-size:24px;letter-spacing:-1px}.logo span{color:#2563eb}
+.nav-links{display:flex;gap:20px;font-size:14px;font-weight:600}.nav-links a{color:#334155}
+.btn{background:#2563eb;color:white!important;padding:10px 18px;border-radius:999px;font-weight:700;font-size:14px;border:none;cursor:pointer}
+.btn-white{background:white;color:#0f172a!important;border:1px solid #e2e8f0;padding:10px 18px;border-radius:999px;font-weight:700;font-size:14px}
+.hero{padding:56px 0 28px;text-align:center;background:radial-gradient(600px 300px at 50% 0%,#dbeafe,transparent)}
+.hero h1{font-size:52px;line-height:1.05;letter-spacing:-2px;margin:0}.hero h1 span{color:#2563eb}
+.hero p{color:#475569;font-size:18px;max-width:640px;margin:16px auto 22px}
+.hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.trust{margin-top:18px;font-size:13px;color:#64748b}.trust b{color:#0f172a}
+.demo-section{padding:32px 0}.demo-box{border:1px solid #e2e8f0;border-radius:20px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.1)}
+.demo-top{height:42px;background:#020617;color:white;display:flex;align-items:center;justify-content:space-between;padding:0 14px;font-size:13px}
+.demo-desktop{height:520px;background:linear-gradient(135deg,#2563eb,#7c3aed 55%,#0ea5e9);position:relative;padding:18px;overflow:hidden}
+.welcome{background:white;border-radius:16px;padding:16px;max-width:480px}.welcome h2{margin:0;font-size:22px}.welcome p{color:#475569;font-size:14px}
+.icons{display:flex;gap:14px;margin-top:16px;flex-wrap:wrap}.icon{width:72px;text-align:center;cursor:pointer;color:white}.icon .box{width:52px;height:52px;margin:0 auto 6px;background:white;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px}.icon span{font-size:12px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.window{position:absolute;width:340px;max-width:92%;background:white;border-radius:14px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.3);display:none}.window.active{display:block}
+.win-head{background:#f8fafc;padding:10px 12px;display:flex;justify-content:space-between;font-weight:700;font-size:13px;cursor:move;border-bottom:1px solid #e2e8f0}.win-head button{border:none;background:#fee2e2;width:24px;height:24px;border-radius:50%;cursor:pointer}
+.win-body{padding:14px;max-height:280px;overflow:auto}
+textarea,input{width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:10px;outline:none}textarea{height:110px}
+.app-row{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #f1f5f9}.app-row .ic{width:36px;height:36px;border-radius:10px;background:#eef2ff;display:flex;align-items:center;justify-content:center}
+.taskbar{height:52px;background:#020617;display:flex;gap:8px;align-items:center;padding:0 12px;overflow-x:auto}.task{background:#1e293b;color:white;border:none;padding:7px 12px;border-radius:999px;font-size:12px;cursor:pointer;white-space:nowrap}
+.section{padding:56px 0}.section h2{font-size:32px;letter-spacing:-1px;margin:0 0 8px;text-align:center}.section p.sub{text-align:center;color:#64748b;max-width:640px;margin:0 auto 28px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{border:1px solid #e2e8f0;border-radius:16px;padding:20px}.card h3{margin:6px 0}.card p{color:#475569;font-size:14px;margin:0}
+.badge{display:inline-block;background:#dcfce7;color:#166534;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700}.badge-blue{background:#dbeafe;color:#1e40af}
+.apps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.app-card{border:1px solid #e2e8f0;border-radius:14px;padding:14px;text-align:left}.app-card b{font-size:15px}.app-card small{color:#64748b}
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.price-card{border:2px solid #e2e8f0;border-radius:18px;padding:22px}.price-card.featured{border-color:#2563eb;background:#eff6ff}.price{font-size:36px;font-weight:900;margin:8px 0}.price small{font-size:14px;color:#64748b;font-weight:400}.check{font-size:14px;margin:6px 0;color:#334155}
+.faq{max-width:720px;margin:0 auto}.faq details{border:1px solid #e2e8f0;border-radius:12px;padding:14px;margin-bottom:10px}.faq summary{font-weight:700;cursor:pointer}
+.footer{background:#020617;color:#94a3b8;padding:36px 0;font-size:13px}.footer a{color:#cbd5e1}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:20px;max-width:1120px;margin:0 auto;padding:0 20px}
+.filter-bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}.filter-bar button{padding:8px 14px;border-radius:999px;border:1px solid #e2e8f0;background:white;cursor:pointer;font-weight:600}.filter-bar button.active{background:#2563eb;color:white;border-color:#2563eb}
+@media(max-width:800px){.hero h1{font-size:36px}.grid,.apps-grid,.pricing{grid-template-columns:1fr 1fr}.nav-links{display:none}.demo-desktop{height:560px}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.grid,.apps-grid,.pricing{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="nav"><div class="nav-inner"><div class="logo">e<span>sktop</span></div><div class="nav-links"><a href="#desktop">Desktop</a><a href="#apps">App Store</a><a href="#students">For Students</a><a href="#teams">For Teams</a><a href="#pricing">Pricing</a></div><div><a href="#desktop" class="btn">Try Free →</a></div></div></div>
+<div class="hero"><div class="container"><div style="display:inline-block;background:#dbeafe;color:#1e40af;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700">NEW • Free Web Desktop — No Install Needed</div><h1>Your Desktop.<br><span>On Any Device.</span><br>In 5 Seconds.</h1><p>Start with a free web desktop. Download real desktop apps safely when you need them. No cracks. No fake download buttons.</p><div class="hero-btns"><a href="#desktop" class="btn" style="padding:13px 22px;font-size:15px">Try Esktop Free →</a><a href="#apps" class="btn-white" style="padding:13px 22px;font-size:15px">Browse App Store</a></div><div class="trust">✓ No credit card &nbsp; ✓ Works on Windows, Mac, Chromebook, Phone &nbsp; ✓ <b>Official links only</b></div></div></div>
+
+<div class="demo-section" id="desktop"><div class="container"><h2 style="text-align:center;font-size:28px;margin:0 0 6px">Try It Right Here — This Is Esktop</h2><p style="text-align:center;color:#64748b;margin:0 0 16px">Click an icon. Drag windows. Type a note — it saves in your browser.</p>
+<div class="demo-box"><div class="demo-top"><b>e<span style="color:#60a5fa">sktop</span> • Demo</b><span>🔍 Search apps... • Guest Mode</span><span style="background:#2563eb;padding:5px 10px;border-radius:999px;font-weight:700">Try Free</span></div>
+<div class="demo-desktop"><div class="welcome"><h2>Welcome to Esktop 👋</h2><p>Your files, notes, and apps — in one place, on any device.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" onclick="openApp('notes')">+ New Note</button><button class="btn-white" style="border:1px solid #e2e8f0" onclick="openApp('store')">Browse Apps →</button></div></div>
+<div class="icons"><div class="icon" onclick="openApp('files')"><div class="box">📁</div><span>Files</span></div><div class="icon" onclick="openApp('notes')"><div class="box">📝</div><span>Notes</span></div><div class="icon" onclick="openApp('todo')"><div class="box">✅</div><span>To-Do</span></div><div class="icon" onclick="openApp('calc')"><div class="box">🧮</div><span>Calculator</span></div><div class="icon" onclick="openApp('store')"><div class="box">🛒</div><span>App Store</span></div><div class="icon" onclick="openApp('student')"><div class="box">🎓</div><span>Students</span></div></div>
+<div class="window" id="win-files" style="left:30px;top:170px"><div class="win-head"><span>📁 Files</span><button onclick="closeApp('files')">✕</button></div><div class="win-body"><div class="app-row"><div class="ic">📄</div><div><b>Criminal Procedure Notes.pdf</b><br><small>Demo file • 2.4 MB</small></div></div><div class="app-row"><div class="ic">📄</div><div><b>TP Assignment - Week 8.docx</b><br><small>Demo file</small></div></div><p style="font-size:12px;color:#64748b">Demo only — Pro will sync your real files.</p></div></div>
+<div class="window" id="win-notes" style="left:360px;top:90px"><div class="win-head"><span>📝 Notes — Auto-saved</span><button onclick="closeApp('notes')">✕</button></div><div class="win-body"><textarea id="noteArea">Esktop plan:
+- Web Desktop + Clean App Store
+- Start with 50 verified apps
+- Target: Students in SG / MY / TH</textarea><p id="savedMsg" style="font-size:12px;color:#16a34a">✓ Saved in this browser</p></div></div>
+<div class="window" id="win-todo" style="left:40px;top:110px"><div class="win-head"><span>✅ To-Do</span><button onclick="closeApp('todo')">✕</button></div><div class="win-body"><div style="display:flex;gap:6px"><input id="todoInput" placeholder="Add task..."><button class="btn" onclick="addTodo()">Add</button></div><div id="todoList"><div style="padding:8px 0;border-bottom:1px solid #f1f5f9;font-size:13px"><input type="checkbox"> Launch esktop.com demo</div><div style="padding:8px 0;font-size:13px"><input type="checkbox"> Add 10 verified apps</div></div></div></div>
+<div class="window" id="win-calc" style="left:380px;top:180px;width:260px"><div class="win-head"><span>🧮 Calculator</span><button onclick="closeApp('calc')">✕</button></div><div class="win-body"><input id="calcDisplay" readonly value="0" style="text-align:right;font-size:20px;font-weight:800"><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px"><button onclick="calcPress('7')" style="padding:10px">7</button><button onclick="calcPress('8')" style="padding:10px">8</button><button onclick="calcPress('9')" style="padding:10px">9</button><button onclick="calcPress('/')" style="padding:10px">÷</button><button onclick="calcPress('4')" style="padding:10px">4</button><button onclick="calcPress('5')" style="padding:10px">5</button><button onclick="calcPress('6')" style="padding:10px">6</button><button onclick="calcPress('*')" style="padding:10px">×</button><button onclick="calcPress('1')" style="padding:10px">1</button><button onclick="calcPress('2')" style="padding:10px">2</button><button onclick="calcPress('3')" style="padding:10px">3</button><button onclick="calcPress('-')" style="padding:10px">-</button><button onclick="calcPress('0')" style="padding:10px">0</button><button onclick="calcPress('.')" style="padding:10px">.</button><button onclick="calcEq()" style="padding:10px">=</button><button onclick="calcPress('+')" style="padding:10px">+</button><button onclick="calcClear()" style="grid-column:span 4;padding:10px;background:#fee2e2;border:none;border-radius:8px">Clear</button></div></div></div>
+<div class="window" id="win-store" style="left:70px;top:70px;width:400px"><div class="win-head"><span>🛒 App Store — Verified</span><button onclick="closeApp('store')">✕</button></div><div class="win-body" id="storeList"></div></div>
+<div class="window" id="win-student" style="left:90px;top:120px"><div class="win-head"><span>🎓 Student Desktops</span><button onclick="closeApp('student')">✕</button></div><div class="win-body"><b>Law Student Desktop</b><p style="font-size:13px;color:#475569">Notes + Cases + To-Do + PDF Reader</p><button class="btn" onclick="alert('Law Desktop loaded (demo)')">Load Law Desktop</button><br><br><b>Business Desktop</b><p style="font-size:13px;color:#475569">Sheets + Slides + Calculator</p><button class="btn-white" style="border:1px solid #e2e8f0" onclick="alert('Business Desktop loaded (demo)')">Load Business Desktop</button></div></div>
+</div><div class="taskbar"><button class="task" onclick="openApp('files')">📁 Files</button><button class="task" onclick="openApp('notes')">📝 Notes</button><button class="task" onclick="openApp('todo')">✅ To-Do</button><button class="task" onclick="openApp('calc')">🧮 Calculator</button><button class="task" onclick="openApp('store')">🛒 App Store</button><button class="task" onclick="openApp('student')">🎓 Students</button><span style="color:#94a3b8;font-size:12px;margin-left:auto">esktop.com • Free Demo</span></div></div></div></div>
+
+<div class="section" style="padding-top:20px"><div class="container"><h2>Why Esktop Is Different</h2><p class="sub">Most download sites are built to trick you. Esktop is built to be trusted.</p><div class="grid"><div class="card"><div style="font-size:28px">🛡️</div><h3>Official Links First</h3><p>We link to the developer's own website when possible. No repacked installers, no hidden toolbars.</p></div><div class="card"><div style="font-size:28px">✅</div><h3>Verified Listings</h3><p>Every app page shows publisher, version, last verified date, and source. If we haven't verified it, we say so.</p></div><div class="card"><div style="font-size:28px">⚡</div><h3>No Install To Start</h3><p>Try the web desktop right here in your browser. Download the real desktop app only when you need it.</p></div></div></div></div>
+
+<div class="section" id="apps" style="background:#f8fafc"><div class="container"><h2>Clean App Store — 50 Verified Apps</h2><p class="sub">No cracks. No fake Download ads. Click Get to go to the official publisher page.</p>
+<div style="max-width:500px;margin:0 auto 16px"><input id="appSearch" placeholder="🔍 Search 50 apps... try VS Code, VLC, Figma" oninput="renderApps(this.value, currentCat)"></div>
+<div class="filter-bar" id="filterBar"><button class="active" onclick="setCat('All',this)">All</button><button onclick="setCat('Productivity',this)">Productivity</button><button onclick="setCat('Design',this)">Design</button><button onclick="setCat('Developer',this)">Developer</button><button onclick="setCat('Video',this)">Video</button><button onclick="setCat('Security',this)">Security</button><button onclick="setCat('Communication',this)">Communication</button></div>
+<div class="apps-grid" id="homeApps"></div></div></div>
+
+<div class="section" id="students"><div class="container"><h2>Built For Students</h2><p class="sub">One click. Your whole semester, organized.</p><div class="grid"><div class="card"><span class="badge">LAW</span><h3>Law Student Desktop</h3><p>Notes for cases, To-Do for deadlines, PDF reader for readings. Perfect for Criminal Procedure, Contract, Torts.</p><br><button class="btn" onclick="openApp('student')">Load Demo →</button></div><div class="card"><span class="badge badge-blue">BUSINESS</span><h3>Business Student Desktop</h3><p>Sheets for accounting, Slides for presentations, Calculator for finance. Everything in one desktop.</p><br><button class="btn" onclick="openApp('student')">Load Demo →</button></div><div class="card"><span class="badge" style="background:#f3e8ff;color:#6b21a8">IT</span><h3>IT Student Desktop</h3><p>VS Code, Terminal notes, Git checklist. Your coding setup, on any school PC.</p><br><button class="btn" onclick="openApp('student')">Load Demo →</button></div></div></div></div>
+
+<div class="section" id="teams" style="background:#0f172a;color:white"><div class="container" style="text-align:center"><h2 style="color:white">For Small Teams</h2><p class="sub" style="color:#94a3b8">Share one desktop with your team. Same files, same apps, same To-Do.</p><div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><span style="background:#1e293b;padding:10px 16px;border-radius:999px;font-size:13px">👥 Shared Desktop</span><span style="background:#1e293b;padding:10px 16px;border-radius:999px;font-size:13px">📁 Shared Files</span><span style="background:#1e293b;padding:10px 16px;border-radius:999px;font-size:13px">🔐 Admin Control</span></div><br><a href="#pricing" class="btn">See Team Pricing →</a></div></div>
+
+<div class="section" id="pricing"><div class="container"><h2>Simple Pricing</h2><p class="sub">Start free. Upgrade when you need sync and storage.</p><div class="pricing"><div class="price-card"><b>Free</b><div class="price">$0 <small>/ forever</small></div><p style="color:#64748b;font-size:14px">Try Esktop, no credit card.</p><div class="check">✓ Web Desktop in browser</div><div class="check">✓ Browse App Store</div><div class="check">✓ 1 Desktop, local save</div><div class="check">✓ Notes, To-Do, Calculator</div><br><button class="btn-white" style="width:100%;border:1px solid #e2e8f0" onclick="openApp('notes')">Start Free</button></div><div class="price-card featured"><span class="badge badge-blue">MOST POPULAR</span><b>Pro — For Students</b><div class="price">$4.90 <small>/ month</small></div><p style="color:#64748b;font-size:14px">Your desktop follows you everywhere.</p><div class="check">✓ Everything in Free</div><div class="check">✓ Cloud sync across devices</div><div class="check">✓ 10GB storage</div><div class="check">✓ Unlimited desktops + templates</div><div class="check">✓ Offline mode</div><br><button class="btn" style="width:100%">Get Pro — Coming Soon</button></div><div class="price-card"><b>Team</b><div class="price">$9.90 <small>/ user / month</small></div><p style="color:#64748b;font-size:14px">For small businesses & clubs.</p><div class="check">✓ Everything in Pro</div><div class="check">✓ Shared team desktop</div><div class="check">✓ Shared files + admin</div><div class="check">✓ Priority support</div><br><button class="btn-white" style="width:100%;border:1px solid #e2e8f0">Contact for Team</button></div></div><p style="text-align:center;font-size:12px;color:#94a3b8;margin-top:12px">Launch strategy: Launch Free first. Add Pro after you have 100 real users.</p></div></div>
+
+<div class="section" style="background:#f8fafc"><div class="container"><h2>FAQ</h2><div class="faq"><details><summary>Is Esktop safe?</summary><p style="color:#475569;font-size:14px">We only link to official developer pages when possible, and we show publisher and source on every app. We never host cracked software.</p></details><details><summary>Do I need to install anything to try it?</summary><p style="color:#475569;font-size:14px">No. The demo on this page works in your browser. You only download a real desktop app when you choose to from the App Store.</p></details><details><summary>Does it work on phone?</summary><p style="color:#475569;font-size:14px">Yes for the web desktop. For .exe apps, you need Windows/Mac. On phone we show a QR code to send the link to your PC.</p></details><details><summary>Is this a real Windows PC in the cloud?</summary><p style="color:#475569;font-size:14px">No — V1 is a web desktop that runs in the browser. It's fast, cheap, and works everywhere. Real cloud Windows is a later, expensive feature.</p></details></div></div></div>
+<div class="section" style="text-align:center"><div class="container"><h2>Your Desktop Is Waiting.</h2><p class="sub">Try it now — no install, no credit card.</p><button class="btn" style="padding:14px 26px;font-size:16px" onclick="document.getElementById('desktop').scrollIntoView({behavior:'smooth'});openApp('notes')">Try Esktop Free →</button></div></div>
+<div class="footer"><div class="footer-grid"><div><div style="color:white;font-weight:900;font-size:20px">e<span style="color:#60a5fa">sktop</span></div><p>Your Desktop, Everywhere.<br>Free web desktop + safe app store.<br><br>© 2026 Esktop. All rights reserved.</p></div><div><b style="color:white">Product</b><br><a href="#desktop">Web Desktop</a><br><a href="#apps">App Store</a><br><a href="#pricing">Pricing</a></div><div><b style="color:white">For</b><br><a href="#students">Students</a><br><a href="#teams">Teams</a></div><div><b style="color:white">Trust</b><br><a href="#apps">How We Verify</a><br><a href="#">Privacy Policy</a><br><a href="#">Terms</a></div></div></div>
+
+<script>
+const apps=[
+ {name:"VS Code",desc:"Code editor by Microsoft",os:"Win • Mac • Free",icon:"💻",cat:"Developer",link:"https://code.visualstudio.com"},
+ {name:"Google Chrome",desc:"Fast, secure browser by Google",os:"Win • Mac • Free",icon:"🌐",cat:"Browser",link:"https://www.google.com/chrome"},
+ {name:"Mozilla Firefox",desc:"Private browser by Mozilla",os:"Win • Mac • Free",icon:"🦊",cat:"Browser",link:"https://www.mozilla.org/firefox"},
+ {name:"Brave Browser",desc:"Privacy-first browser",os:"Win • Mac • Free",icon:"🦁",cat:"Browser",link:"https://brave.com"},
+ {name:"VLC Media Player",desc:"Play any video format",os:"Win • Mac • Free",icon:"🎬",cat:"Video",link:"https://www.videolan.org/vlc"},
+ {name:"LibreOffice",desc:"Docs, Sheets, Slides - free Office",os:"Win • Mac • Free",icon:"📄",cat:"Productivity",link:"https://www.libreoffice.org"},
+ {name:"7-Zip",desc:"Unzip anything, free",os:"Win • Free",icon:"🗜️",cat:"Tools",link:"https://www.7-zip.org"},
+ {name:"OBS Studio",desc:"Record & stream for free",os:"Win • Mac • Free",icon:"🎥",cat:"Video",link:"https://obsproject.com"},
+ {name:"Figma",desc:"Design + prototype",os:"Win • Mac • Freemium",icon:"🎨",cat:"Design",link:"https://www.figma.com/downloads"},
+ {name:"Notion",desc:"Notes + docs + wiki",os:"Win • Mac • Freemium",icon:"📝",cat:"Productivity",link:"https://www.notion.so/desktop"},
+ {name:"Zoom",desc:"Video meetings",os:"Win • Mac • Freemium",icon:"📹",cat:"Communication",link:"https://zoom.us/download"},
+ {name:"Microsoft Teams",desc:"Chat + meetings for teams",os:"Win • Mac • Freemium",icon:"👥",cat:"Communication",link:"https://www.microsoft.com/en-us/microsoft-teams/download-app"},
+ {name:"Slack",desc:"Team chat",os:"Win • Mac • Freemium",icon:"💬",cat:"Communication",link:"https://slack.com/downloads"},
+ {name:"Discord",desc:"Chat for communities & gamers",os:"Win • Mac • Free",icon:"🎮",cat:"Communication",link:"https://discord.com/download"},
+ {name:"Telegram Desktop",desc:"Fast, secure messaging",os:"Win • Mac • Free",icon:"✈️",cat:"Communication",link:"https://desktop.telegram.org"},
+ {name:"WhatsApp Desktop",desc:"Chat on your PC",os:"Win • Mac • Free",icon:"💚",cat:"Communication",link:"https://www.whatsapp.com/download"},
+ {name:"Spotify",desc:"Music + podcasts",os:"Win • Mac • Freemium",icon:"🎵",cat:"Audio",link:"https://www.spotify.com/download"},
+ {name:"Audacity",desc:"Free audio editor",os:"Win • Mac • Free",icon:"🎙️",cat:"Audio",link:"https://www.audacityteam.org"},
+ {name:"GIMP",desc:"Free Photoshop alternative",os:"Win • Mac • Free",icon:"🖌️",cat:"Design",link:"https://www.gimp.org"},
+ {name:"Inkscape",desc:"Free vector graphics",os:"Win • Mac • Free",icon:"✒️",cat:"Design",link:"https://inkscape.org"},
+ {name:"Blender",desc:"Free 3D + animation",os:"Win • Mac • Free",icon:"🧊",cat:"Design",link:"https://www.blender.org/download"},
+ {name:"Krita",desc:"Free digital painting",os:"Win • Mac • Free",icon:"🎭",cat:"Design",link:"https://krita.org"},
+ {name:"Paint.NET",desc:"Free photo editor for Windows",os:"Win • Free",icon:"🖼️",cat:"Design",link:"https://www.getpaint.net"},
+ {name:"Canva",desc:"Design anything easily",os:"Win • Mac • Freemium",icon:"✨",cat:"Design",link:"https://www.canva.com/download"},
+ {name:"Python",desc:"Programming language",os:"Win • Mac • Free",icon:"🐍",cat:"Developer",link:"https://www.python.org/downloads"},
+ {name:"Node.js",desc:"JavaScript runtime",os:"Win • Mac • Free",icon:"🟢",cat:"Developer",link:"https://nodejs.org"},
+ {name:"Git",desc:"Version control",os:"Win • Mac • Free",icon:"🔀",cat:"Developer",link:"https://git-scm.com/downloads"},
+ {name:"GitHub Desktop",desc:"Git made easy",os:"Win • Mac • Free",icon:"🐙",cat:"Developer",link:"https://desktop.github.com"},
+ {name:"Docker Desktop",desc:"Run apps in containers",os:"Win • Mac • Freemium",icon:"🐳",cat:"Developer",link:"https://www.docker.com/products/docker-desktop"},
+ {name:"Postman",desc:"Test APIs",os:"Win • Mac • Freemium",icon:"📬",cat:"Developer",link:"https://www.postman.com/downloads"},
+ {name:"Sublime Text",desc:"Fast code editor",os:"Win • Mac • Paid Trial",icon:"⌨️",cat:"Developer",link:"https://www.sublimetext.com"},
+ {name:"Notepad++",desc:"Free code + text editor",os:"Win • Free",icon:"📓",cat:"Developer",link:"https://notepad-plus-plus.org"},
+ {name:"Adobe Acrobat Reader",desc:"Read PDFs",os:"Win • Mac • Free",icon:"📕",cat:"Productivity",link:"https://www.adobe.com/acrobat/pdf-reader.html"},
+ {name:"Foxit PDF Reader",desc:"Fast PDF reader",os:"Win • Mac • Freemium",icon:"📘",cat:"Productivity",link:"https://www.foxit.com/pdf-reader"},
+ {name:"Google Drive",desc:"Cloud storage + sync",os:"Win • Mac • Free",icon:"☁️",cat:"Productivity",link:"https://www.google.com/drive/download"},
+ {name:"Dropbox",desc:"Cloud storage + sharing",os:"Win • Mac • Freemium",icon:"📦",cat:"Productivity",link:"https://www.dropbox.com/install"},
+ {name:"OneDrive",desc:"Microsoft cloud storage",os:"Win • Mac • Freemium",icon:"☁️",cat:"Productivity",link:"https://onedrive.live.com/about/en-us/download"},
+ {name:"Evernote",desc:"Notes + capture",os:"Win • Mac • Freemium",icon:"🐘",cat:"Productivity",link:"https://evernote.com/download"},
+ {name:"Anki",desc:"Flashcards for studying",os:"Win • Mac • Free",icon:"🧠",cat:"Productivity",link:"https://apps.ankiweb.net"},
+ {name:"Steam",desc:"PC games store",os:"Win • Mac • Free",icon:"🎮",cat:"Video",link:"https://store.steampowered.com/about"},
+ {name:"Epic Games Launcher",desc:"Fortnite + free games",os:"Win • Mac • Free",icon:"🏹",cat:"Video",link:"https://www.epicgames.com"},
+ {name:"HandBrake",desc:"Convert videos for free",os:"Win • Mac • Free",icon:"🔄",cat:"Video",link:"https://handbrake.fr"},
+ {name:"Shotcut",desc:"Free video editor",os:"Win • Mac • Free",icon:"✂️",cat:"Video",link:"https://www.shotcut.org"},
+ {name:"DaVinci Resolve",desc:"Pro video editing",os:"Win • Mac • Freemium",icon:"🎞️",cat:"Video",link:"https://www.blackmagicdesign.com/products/davinciresolve"},
+ {name:"Thunderbird",desc:"Free email app",os:"Win • Mac • Free",icon:"📧",cat:"Communication",link:"https://www.thunderbird.net"},
+ {name:"Bitwarden",desc:"Free password manager",os:"Win • Mac • Freemium",icon:"🔐",cat:"Security",link:"https://bitwarden.com/download"},
+ {name:"Malwarebytes",desc:"Malware protection",os:"Win • Mac • Freemium",icon:"🛡️",cat:"Security",link:"https://www.malwarebytes.com"},
+ {name:"IrfanView",desc:"Fast image viewer",os:"Win • Free",icon:"👁️",cat:"Design",link:"https://www.irfanview.com"},
+ {name:"WinRAR",desc:"Compress + unzip RAR",os:"Win • Paid Trial",icon:"📦",cat:"Tools",link:"https://www.rarlab.com"},
+ {name:"Google Earth Pro",desc:"Explore the world in 3D",os:"Win • Mac • Free",icon:"🌍",cat:"Tools",link:"https://www.google.com/earth"},
+];
+let currentCat='All';
+function setCat(cat,btn){currentCat=cat;document.querySelectorAll('.filter-bar button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderApps(document.getElementById('appSearch').value,cat);}
+function renderApps(filter="",cat="All"){
+  const list=apps.filter(a=>(cat==='All'||a.cat===cat)&&a.name.toLowerCase().includes(filter.toLowerCase()));
+  document.getElementById('homeApps').innerHTML=list.map(a=>`<div class="app-card"><div style="font-size:26px">${a.icon}</div><b>${a.name}</b> <span class="badge">Verified</span><br><small>${a.desc}<br>${a.os} • ${a.cat}</small><br><button class="btn" style="margin-top:8px;padding:7px 12px;font-size:12px" onclick="window.open('${a.link}','_blank')">Get →</button></div>`).join('')||'<p>No apps found.</p>';
+  document.getElementById('storeList').innerHTML=list.slice(0,12).map(a=>`<div class="app-row"><div class="ic">${a.icon}</div><div style="flex:1"><b>${a.name}</b> <span class="badge">Verified</span><br><small>${a.desc} • ${a.os}</small></div><button class="btn" onclick="window.open('${a.link}','_blank')">Get</button></div>`).join('');
+}
+renderApps();
+function openApp(id){document.querySelectorAll('.window').forEach(w=>w.classList.remove('active'));const el=document.getElementById('win-'+id);if(el)el.classList.add('active');}
+function closeApp(id){document.getElementById('win-'+id).classList.remove('active');}
+document.querySelectorAll('.window').forEach(win=>{const head=win.querySelector('.win-head');let sx=0,sy=0,ox=0,oy=0,drag=false;head.addEventListener('mousedown',e=>{drag=true;sx=e.clientX;sy=e.clientY;ox=win.offsetLeft;oy=win.offsetTop;});window.addEventListener('mousemove',e=>{if(!drag)return;win.style.left=(ox+e.clientX-sx)+'px';win.style.top=(oy+e.clientY-sy)+'px';});window.addEventListener('mouseup',()=>drag=false);head.addEventListener('touchstart',e=>{drag=true;sx=e.touches[0].clientX;sy=e.touches[0].clientY;ox=win.offsetLeft;oy=win.offsetTop;});window.addEventListener('touchmove',e=>{if(!drag)return;win.style.left=(ox+e.touches[0].clientX-sx)+'px';win.style.top=(oy+e.touches[0].clientY-sy)+'px';});window.addEventListener('touchend',()=>drag=false);});
+const noteArea=document.getElementById('noteArea');if(noteArea){noteArea.value=localStorage.getItem('esktop_note')||noteArea.value;noteArea.addEventListener('input',()=>{localStorage.setItem('esktop_note',noteArea.value);document.getElementById('savedMsg').textContent='✓ Saved '+new Date().toLocaleTimeString();});}
+function addTodo(){const inp=document.getElementById('todoInput');if(!inp.value.trim())return;const d=document.createElement('div');d.style.cssText='padding:8px 0;border-bottom:1px solid #f1f5f9;font-size:13px';d.innerHTML=`<input type="checkbox"> ${inp.value}`;document.getElementById('todoList').appendChild(d);inp.value='';}
+let calcVal="";function calcPress(v){calcVal+=v;document.getElementById('calcDisplay').value=calcVal;}function calcEq(){try{calcVal=String(eval(calcVal));document.getElementById('calcDisplay').value=calcVal;}catch(e){document.getElementById('calcDisplay').value='Error';calcVal="";}}function calcClear(){calcVal="";document.getElementById('calcDisplay').value="0";}
+setTimeout(()=>openApp('notes'),800);
+</script>
+</body>
+</html>
