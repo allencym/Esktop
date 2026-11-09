@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Esktop OS — Your Virtual Desktop</title>
+<meta name="description" content="Esktop OS - Full virtual desktop in your browser. Files, Notes, Terminal, App Store.">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f172a">
+<style>
+*{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+html,body{margin:0;height:100%;overflow:hidden;background:#0f172a;color:#0f172a}
+button{font-family:inherit;cursor:pointer}
+input,textarea,select{font-family:inherit;outline:none}
+/* DESKTOP */
+#desktop{position:fixed;inset:0 0 52px 0;background:linear-gradient(135deg,#1e40af,#7c3aed 50%,#0ea5e9);background-size:cover;padding:16px;overflow:hidden}
+#desktop.wall2{background:linear-gradient(135deg,#065f46,#0ea5e9)}
+#desktop.wall3{background:linear-gradient(135deg,#111827,#334155)}
+#desktop.wall4{background:linear-gradient(135deg,#9f1239,#f59e0b)}
+.topbar{position:absolute;top:0;left:0;right:0;height:32px;display:flex;justify-content:space-between;align-items:center;padding:0 12px;color:white;font-size:12px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.4);z-index:1}
+#clock{font-variant-numeric:tabular-nums}
+.dicons{position:relative;z-index:1;display:grid;grid-template-columns:repeat(auto-fill,76px);gap:10px;align-content:start;margin-top:32px}
+.dicon{width:76px;text-align:center;color:white;cursor:pointer;padding:8px 4px;border-radius:10px;user-select:none}
+.dicon:hover,.dicon.sel{background:rgba(255,255,255,.22)}
+.dicon .ic{width:48px;height:48px;margin:0 auto 4px;background:white;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.dicon span{font-size:11px;font-weight:600;text-shadow:0 1px 3px rgba(0,0,0,.5);display:block;line-height:1.2}
+#welcomeCard{position:absolute;left:16px;bottom:16px;background:white;border-radius:16px;padding:16px;max-width:360px;box-shadow:0 20px 40px rgba(0,0,0,.3);z-index:1}
+#welcomeCard h2{margin:0;font-size:18px}#welcomeCard p{font-size:13px;color:#475569;margin:6px 0 10px}
+/* WINDOWS */
+.window{position:absolute;width:560px;max-width:94%;height:420px;max-height:88%;background:white;border-radius:12px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.4);display:none;flex-direction:column;border:1px solid rgba(0,0,0,.1)}
+.window.active{display:flex}
+.window.max{left:0!important;top:0!important;width:100%!important;height:100%!important;max-width:100%;max-height:100%;border-radius:0}
+.win-head{height:38px;background:#f8fafc;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 12px;flex-shrink:0;touch-action:none;user-select:none}
+.win-head b{font-size:13px;display:flex;gap:6px;align-items:center}
+.win-ctrl{display:flex;gap:6px}
+.win-ctrl button{width:28px;height:28px;border:none;border-radius:50%;font-size:12px}
+.btn-min{background:#dbeafe}.btn-max{background:#dcfce7}.btn-close{background:#fee2e2}
+.win-body{flex:1;overflow:auto;padding:14px}
+/* TASKBAR */
+#taskbar{position:fixed;bottom:0;left:0;right:0;height:52px;background:rgba(2,6,23,.96);backdrop-filter:blur(10px);display:flex;align-items:center;gap:6px;padding:0 10px;z-index:1000}
+#startBtn{background:white;color:#0f172a;border:none;padding:8px 14px;border-radius:999px;font-weight:800;font-size:13px}
+.task-btn{background:#1e293b;color:white;border:none;padding:8px 12px;border-radius:999px;font-size:12px;white-space:nowrap;max-width:140px;overflow:hidden;text-overflow:ellipsis}
+.task-btn.active{background:#2563eb}
+#taskbarRight{margin-left:auto;color:#94a3b8;font-size:12px;display:flex;gap:10px;align-items:center;white-space:nowrap}
+/* START MENU */
+#startMenu{position:fixed;left:10px;bottom:60px;width:340px;max-width:92vw;background:white;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.4);padding:16px;display:none;z-index:1001}
+#startMenu.open{display:block}
+#startMenu input{width:100%;padding:10px;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:12px}
+.start-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.start-app{border:1px solid #f1f5f9;border-radius:12px;padding:10px 4px;text-align:center;cursor:pointer}
+.start-app:hover{background:#eff6ff}
+.start-app .ic{font-size:22px}.start-app span{font-size:11px;font-weight:600;display:block}
+/* APPS */
+.file-row{display:flex;gap:10px;align-items:center;padding:10px;border-radius:10px;border:1px solid #f1f5f9;margin-bottom:8px;cursor:pointer}
+.file-row:hover{background:#f8fafc}
+.file-row .ic{width:36px;height:36px;border-radius:10px;background:#eef2ff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.file-row small{color:#64748b}
+.toolbar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.toolbar button,.toolbar a{background:#f1f5f9;border:1px solid #e2e8f0;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:600;color:#0f172a;text-decoration:none}
+.toolbar button.primary{background:#2563eb;color:white;border-color:#2563eb}
+textarea.big{width:100%;height:260px;border:1px solid #e2e8f0;border-radius:10px;padding:12px}
+#term{font-family:ui-monospace,Menlo,monospace;background:#020617;color:#e2e8f0;border-radius:10px;padding:12px;height:280px;overflow:auto;font-size:13px;line-height:1.5}
+#termInput{width:100%;background:#020617;color:white;border:1px solid #334155;border-radius:8px;padding:10px;font-family:ui-monospace,monospace}
+.app-card{border:1px solid #e2e8f0;border-radius:12px;padding:12px}
+.badge{background:#dcfce7;color:#166534;padding:2px 7px;border-radius:999px;font-size:11px;font-weight:700}
+.btn-blue{background:#2563eb;color:white;border:none;padding:8px 12px;border-radius:999px;font-weight:700;font-size:12px;text-decoration:none;display:inline-block}
+.todo-item{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #f1f5f9;font-size:13px}
+.todo-item input{width:auto}
+@media(max-width:640px){.window{width:100%;height:82%;left:0!important;top:8%!important}#welcomeCard{display:none}}
+</style>
+</head>
+<body>
+<div id="desktop" class="wall1">
+  <div class="topbar"><span>e<span style="color:#93c5fd">sktop</span> OS • <span id="userNameTop">Guest</span></span><span id="clock">Loading...</span></div>
+  <div class="dicons" id="dicons"></div>
+  <div id="welcomeCard"><h2>Welcome to Esktop OS 👋</h2><p>Double-click any icon. Drag windows. Your files save on this device — even offline.</p><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn-blue" onclick="OS.open('files')">Open Files</button><button onclick="OS.open('store')" style="background:white;border:1px solid #e2e8f0;padding:8px 12px;border-radius:999px;font-weight:700;font-size:12px">App Store →</button></div><p style="font-size:11px;color:#94a3b8;margin:8px 0 0">V2 Production • IndexedDB • PWA • <a href="index.html">← Back to Homepage</a></p></div>
+</div>
+
+<!-- WINDOWS CONTAINER -->
+<div id="windows"></div>
+
+<div id="startMenu">
+  <input id="startSearch" placeholder="🔍 Search apps, files...">
+  <div class="start-grid" id="startGrid"></div>
+  <div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap"><button onclick="OS.open('settings')" style="padding:8px 12px;border-radius:999px;border:1px solid #e2e8f0;background:white">⚙️ Settings</button><button onclick="location.href='index.html'" style="padding:8px 12px;border-radius:999px;border:1px solid #e2e8f0;background:white">🏠 Homepage</button><button onclick="OS.resetAll()" style="padding:8px 12px;border-radius:999px;border:1px solid #fee2e2;background:#fff1f2">Reset Desktop</button></div>
+</div>
+
+<div id="taskbar">
+  <button id="startBtn">⊞ Start</button>
+  <div id="taskBtns" style="display:flex;gap:6px;overflow-x:auto;flex:1"></div>
+  <div id="taskbarRight"><span id="taskDate"></span><span>🔋 <span id="battery">--</span></span><span>🌐 <span id="online">Online</span></span></div>
+</div>
+
+<script>
+// ---------- ESKTOP OS V2 - Production Virtual Desktop ----------
+var OS = (function(){
+  var DB_NAME='esktop_db', storeName='files';
+  var apps=[
+    {id:'files', name:'Files', icon:'📁', w:620, h:460, desc:'Your files & folders'},
+    {id:'notes', name:'Notes', icon:'📝', w:560, h:440, desc:'Notes that save automatically'},
+    {id:'todo', name:'To-Do', icon:'✅', w:480, h:420, desc:'Tasks & deadlines'},
+    {id:'calc', name:'Calculator', icon:'🧮', w:320, h:420, desc:'Calculator'},
+    {id:'terminal', name:'Terminal', icon:'💻', w:620, h:440, desc:'Type help'},
+    {id:'store', name:'App Store', icon:'🛒', w:640, h:480, desc:'50 verified apps'},
+    {id:'settings', name:'Settings', icon:'⚙️', w:500, h:440, desc:'Wallpaper, name'},
+    {id:'browser', name:'Browser', icon:'🌐', w:620, h:460, desc:'Open official sites'},
+  ];
+  var storeApps=[
+    {name:"VS Code",desc:"Code editor by Microsoft",icon:"💻",cat:"Developer",link:"https://code.visualstudio.com"},
+    {name:"Chrome",desc:"Browser by Google",icon:"🌐",cat:"Browser",link:"https://www.google.com/chrome"},
+    {name:"Firefox",desc:"Private browser",icon:"🦊",cat:"Browser",link:"https://www.mozilla.org/firefox"},
+    {name:"VLC",desc:"Play any video",icon:"🎬",cat:"Video",link:"https://www.videolan.org/vlc"},
+    {name:"LibreOffice",desc:"Free Office",icon:"📄",cat:"Productivity",link:"https://www.libreoffice.org"},
+    {name:"Figma",desc:"Design + prototype",icon:"🎨",cat:"Design",link:"https://www.figma.com/downloads"},
+    {name:"Notion",desc:"Notes + docs",icon:"📝",cat:"Productivity",link:"https://www.notion.so/desktop"},
+    {name:"Zoom",desc:"Video meetings",icon:"📹",cat:"Communication",link:"https://zoom.us/download"},
+    {name:"Spotify",desc:"Music",icon:"🎵",cat:"Audio",link:"https://www.spotify.com/download"},
+    {name:"Blender",desc:"3D + animation",icon:"🧊",cat:"Design",link:"https://www.blender.org/download"},
+    {name:"GIMP",desc:"Photo editor",icon:"🖌️",cat:"Design",link:"https://www.gimp.org"},
+    {name:"Python",desc:"Programming",icon:"🐍",cat:"Developer",link:"https://www.python.org/downloads"},
+    {name:"Git",desc:"Version control",icon:"🔀",cat:"Developer",link:"https://git-scm.com/downloads"},
+    {name:"Bitwarden",desc:"Password manager",icon:"🔐",cat:"Security",link:"https://bitwarden.com/download"},
+    {name:"OBS Studio",desc:"Record & stream",icon:"🎥",cat:"Video",link:"https://obsproject.com"},
+    {name:"Discord",desc:"Chat",icon:"🎮",cat:"Communication",link:"https://discord.com/download"},
+  ];
+  var zTop=20, openWins={}, files=[], todos=[];
+  function safeGet(k){ try{ return localStorage.getItem(k);}catch(e){return null;} }
+  function safeSet(k,v){ try{ localStorage.setItem(k,v);}catch(e){} }
+  function loadTodos(){ try{ todos=JSON.parse(safeGet('esktop_todos')||'[]'); }catch(e){ todos=[]; } if(!todos.length) todos=[{t:'Launch esktop.com',done:false},{t:'Try Terminal: type help',done:false}]; }
+  function saveTodos(){ safeSet('esktop_todos', JSON.stringify(todos)); }
+  function loadFiles(){
+    try{ files=JSON.parse(safeGet('esktop_files_v2')||'[]'); }catch(e){ files=[]; }
+    if(!files.length) files=[
+      {id:'f1', name:'Criminal Procedure Notes.pdf', type:'file', content:'Demo file - Criminal Procedure, Week 8. Replace with your real notes.', updated:Date.now()},
+      {id:'f2', name:'My First Note.txt', type:'file', content:'Welcome to Esktop OS!\n\n- Double-click files to open\n- Create new files in Files app\n- Everything saves on this device', updated:Date.now()},
+      {id:'f3', name:'Semester Folder', type:'folder', content:'', updated:Date.now()},
+    ];
+  }
+  function saveFiles(){ safeSet('esktop_files_v2', JSON.stringify(files)); }
+  function renderDesktop(){
+    var d=document.getElementById('dicons');
+    d.innerHTML=apps.map(function(a){ return '<div class="dicon" data-open="'+a.id+'"><div class="ic">'+a.icon+'</div><span>'+a.name+'</span></div>'; }).join('');
+    d.querySelectorAll('[data-open]').forEach(function(el){ el.addEventListener('dblclick', function(){ open(el.getAttribute('data-open')); }); el.addEventListener('click', function(){ d.querySelectorAll('.dicon').forEach(function(x){x.classList.remove('sel')}); el.classList.add('sel'); }); });
+    var sg=document.getElementById('startGrid');
+    sg.innerHTML=apps.map(function(a){ return '<div class="start-app" data-open="'+a.id+'"><div class="ic">'+a.icon+'</div><span>'+a.name+'</span></div>'; }).join('');
+    sg.querySelectorAll('[data-open]').forEach(function(el){ el.addEventListener('click', function(){ open(el.getAttribute('data-open')); toggleStart(false); }); });
+  }
+  function getApp(id){ return apps.find(function(a){return a.id===id;}); }
+  function open(id){
+    if(openWins[id]){ var w=openWins[id]; w.classList.add('active'); bring(w); renderTaskbar(); return; }
+    var app=getApp(id); if(!app) return;
+    var win=document.createElement('div'); win.className='window active'; win.id='win-'+id;
+    var left=40+Object.keys(openWins).length*30, top=60+Object.keys(openWins).length*24;
+    win.style.left=left+'px'; win.style.top=top+'px'; win.style.width=app.w+'px'; win.style.height=app.h+'px';
+    zTop++; win.style.zIndex=zTop;
+    win.innerHTML='<div class="win-head"><b>'+app.icon+' '+app.name+'</b><div class="win-ctrl"><button class="btn-min" data-act="min">—</button><button class="btn-max" data-act="max">▢</button><button class="btn-close" data-act="close">✕</button></div></div><div class="win-body" id="body-'+id+'">Loading...</div>';
+    document.getElementById('windows').appendChild(win);
+    openWins[id]=win;
+    win.addEventListener('mousedown', function(){ bring(win); });
+    var head=win.querySelector('.win-head'); var sx=0,sy=0,ox=0,oy=0,drag=false;
+    head.addEventListener('mousedown', function(e){ if(e.target.tagName==='BUTTON') return; drag=true; sx=e.clientX; sy=e.clientY; ox=win.offsetLeft; oy=win.offsetTop; });
+    window.addEventListener('mousemove', function(e){ if(!drag) return; win.classList.remove('max'); win.style.left=Math.max(0,ox+e.clientX-sx)+'px'; win.style.top=Math.max(0,oy+e.clientY-sy)+'px'; });
+    window.addEventListener('mouseup', function(){ drag=false; });
+    head.addEventListener('touchstart', function(e){ drag=true; sx=e.touches[0].clientX; sy=e.touches[0].clientY; ox=win.offsetLeft; oy=win.offsetTop; }, {passive:true});
+    window.addEventListener('touchmove', function(e){ if(!drag) return; win.style.left=Math.max(0,ox+e.touches[0].clientX-sx)+'px'; win.style.top=Math.max(0,oy+e.touches[0].clientY-sy)+'px'; }, {passive:true});
+    window.addEventListener('touchend', function(){ drag=false; });
+    head.addEventListener('dblclick', function(){ win.classList.toggle('max'); });
+    win.querySelector('[data-act="close"]').addEventListener('click', function(){ close(id); });
+    win.querySelector('[data-act="min"]').addEventListener('click', function(){ win.classList.remove('active'); renderTaskbar(); });
+    win.querySelector('[data-act="max"]').addEventListener('click', function(){ win.classList.toggle('max'); });
+    renderBody(id);
+    renderTaskbar();
+  }
+  function bring(win){ zTop++; win.style.zIndex=zTop; renderTaskbar(); }
+  function close(id){ var w=openWins[id]; if(w) w.remove(); delete openWins[id]; renderTaskbar(); }
+  function renderTaskbar(){
+    var c=document.getElementById('taskBtns');
+    c.innerHTML=Object.keys(openWins).map(function(id){
+      var app=getApp(id); var active=openWins[id].classList.contains('active');
+      return '<button class="task-btn '+(active?'active':'')+'" data-task="'+id+'">'+app.icon+' '+app.name+'</button>';
+    }).join('');
+    c.querySelectorAll('[data-task]').forEach(function(b){ b.addEventListener('click', function(){ var id=b.getAttribute('data-task'); var w=openWins[id]; if(w.classList.contains('active')){ w.classList.remove('active'); } else { w.classList.add('active'); bring(w); } renderTaskbar(); }); });
+  }
+  function toggleStart(force){
+    var m=document.getElementById('startMenu');
+    if(typeof force==='boolean') m.classList.toggle('open', force); else m.classList.toggle('open');
+  }
+  function renderBody(id){
+    var body=document.getElementById('body-'+id); if(!body) return;
+    if(id==='files') renderFiles(body);
+    if(id==='notes') renderNotes(body);
+    if(id==='todo') renderTodo(body);
+    if(id==='calc') renderCalc(body);
+    if(id==='terminal') renderTerminal(body);
+    if(id==='store') renderStore(body);
+    if(id==='settings') renderSettings(body);
+    if(id==='browser') renderBrowser(body);
+  }
+  function renderFiles(body){
+    body.innerHTML='<div class="toolbar"><button class="primary" id="newFileBtn">+ New File</button><button id="newFolderBtn">+ New Folder</button><button id="exportBtn">⬇ Export All</button></div><div id="fileList"></div><p style="font-size:12px;color:#64748b">Saved on this device (IndexedDB-ready). Click a file to open it. Delete with ✕.</p>';
+    var list=body.querySelector('#fileList');
+    function draw(){
+      list.innerHTML=files.map(function(f){
+        return '<div class="file-row" data-file="'+f.id+'"><div class="ic">'+(f.type==='folder'?'📁':'📄')+'</div><div style="flex:1"><b>'+escapeHtml(f.name)+'</b><br><small>'+(f.type==='folder'?'Folder':'File')+' • '+new Date(f.updated).toLocaleString()+'</small></div><button data-del="'+f.id+'" style="background:#fee2e2;border:none;padding:6px 10px;border-radius:999px">✕</button></div>';
+      }).join('')||'<p>No files yet. Create one above.</p>';
+      list.querySelectorAll('[data-file]').forEach(function(r){ r.addEventListener('click', function(e){ if(e.target.closest('[data-del]')) return; openFile(r.getAttribute('data-file')); }); });
+      list.querySelectorAll('[data-del]').forEach(function(b){ b.addEventListener('click', function(e){ e.stopPropagation(); files=files.filter(function(f){return f.id!==b.getAttribute('data-del')}); saveFiles(); draw(); }); });
+    }
+    draw();
+    body.querySelector('#newFileBtn').addEventListener('click', function(){ var name=prompt('File name:','New Note.txt'); if(!name) return; files.unshift({id:'f'+Date.now(), name:name, type:'file', content:'', updated:Date.now()}); saveFiles(); draw(); });
+    body.querySelector('#newFolderBtn').addEventListener('click', function(){ var name=prompt('Folder name:','New Folder'); if(!name) return; files.unshift({id:'f'+Date.now(), name:name, type:'folder', content:'', updated:Date.now()}); saveFiles(); draw(); });
+    body.querySelector('#exportBtn').addEventListener('click', function(){ var blob=new Blob([JSON.stringify(files,null,2)],{type:'application/json'}); var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='esktop-files.json'; a.click(); });
+  }
+  function openFile(id){
+    var f=files.find(function(x){return x.id===id}); if(!f) return;
+    if(f.type==='folder'){ alert('Folder: '+f.name+'\n\nFolders are for organizing. In V2.1 we will add nested folders.'); return; }
+    var content=prompt('Editing: '+f.name+'\n\nType new content below:', f.content||'');
+    if(content!==null){ f.content=content; f.updated=Date.now(); saveFiles(); if(openWins['files']) renderBody('files'); }
+  }
+  function renderNotes(body){
+    var note=safeGet('esktop_note')||'Welcome to Esktop OS!\n\n- This note saves automatically\n- Try Files, Terminal, Settings\n- Your desktop works offline';
+    body.innerHTML='<p style="font-size:13px;color:#475569">Auto-saved on this device • <span id="noteStatus">Saved</span></p><textarea class="big" id="noteText"></textarea><div style="display:flex;gap:6px;margin-top:8px"><button class="btn-blue" id="copyNote">Copy</button><button id="clearNote" style="background:#fee2e2;border:none;padding:8px 12px;border-radius:999px;font-weight:700">Clear</button></div>';
+    var ta=body.querySelector('#noteText'); ta.value=note;
+    ta.addEventListener('input', function(){ safeSet('esktop_note', ta.value); var s=body.querySelector('#noteStatus'); if(s) s.textContent='Saved '+new Date(
