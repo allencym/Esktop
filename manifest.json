@@ -1,0 +1,16 @@
+{
+  "name": "Esktop OS - Your Virtual Desktop",
+  "short_name": "Esktop",
+  "description": "Free virtual desktop in your browser. Files, Notes, Terminal, App Store.",
+  "start_url": "/desktop.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "https://esktop.com/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
